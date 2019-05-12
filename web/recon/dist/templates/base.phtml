@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>URProfile</title>
+        <script src="/js/jquery-3.2.1.slim.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <script src="/js/bootstrap.min.js"></script>
+        <link href="/css/custom.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav class="site-header sticky-top py-1 mb-5">
+            <div class="container d-flex flex-column flex-md-row justify-content-between">
+                <a class="py-2" href="/">URProfile</a>
+                {% if user is defined %}
+                <a class="py-2 d-none d-md-inline-block" href="/profile/{{ user['id'] }}">Your Profile</a>
+                {% else %}
+                <a class="py-2 d-none d-md-inline-block" href="/signup">Sign Up</a>
+                <a class="py-2 d-none d-md-inline-block" href="/recover">Recovery</a>
+                {% endif %}
+                <a class="py-2 d-none d-md-inline-block" href="/report">Report</a>
+            </div>
+        </nav>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

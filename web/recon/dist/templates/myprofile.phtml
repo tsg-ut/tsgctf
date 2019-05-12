@@ -1,0 +1,44 @@
+{% extends 'base.phtml' %}
+
+{% block body %}
+
+<div class="container text-center w-50">
+    <div class="row justify-content-center mb-5 mt-5">
+        {% if error_message is defined %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+        {% endif %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Your Profile</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ user['username'] }}</h6>
+                <p class="card-text">{{ user['profile'] | raw }}</p>
+                <div class="form-group">
+                    {% for key, value in recovery_questions %}
+                    {{ value }} <input type="checkbox" id="{{ key }}" onchange="{{ key }}.checked={{ recovery_answers[loop.index0]?'true':'false'}};" {{ recovery_answers[loop.index0] ? 'checked' : ''}}> 
+                    {% endfor %}
+                </div>
+                <a class="card-link" href="/profile/{{ user['id'] }}">Your Profile Page</a>
+            </div>            
+        </div>
+    </div>
+    <div class="row justify-content-center border-top mb-5 mt-5 pb-5 pt-5">    
+        <form method="post" action="/profile" class="w-100">
+            <h2>Edit Your Profile</h2>
+            <textarea name="profile" placeholder="profile" class="form-control w-100">{{ user['profile'] }}</textarea>
+            <input type="hidden" name="{{ token['keys']['name'] }}" value="{{ token['values']['name'] }}">
+            <input type="hidden" name="{{ token['keys']['value'] }}" value="{{ token['values']['value'] }}">
+            <button type="submit" class="form-control">Edit</button>
+        </form>
+    </div>
+    <div class="row justify-content-center border-top mb-5 mt-5 p-5">    
+        <form method="post" action="/signout">
+            <input type="hidden" name="_METHOD" value="DELETE">
+            <input type="hidden" name="{{ token['keys']['name'] }}" value="{{ token['values']['name'] }}">
+            <input type="hidden" name="{{ token['keys']['value'] }}" value="{{ token['values']['value'] }}">
+            <button type="submit" class="form-control">Sign Out</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

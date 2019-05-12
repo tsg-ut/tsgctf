@@ -1,0 +1,32 @@
+cat /dev/input/event1 > input &
+rm /dev/urandom
+rm /dev/random
+LANG=C date --utc > /dev/random
+echo nyan >> /dev/random
+curl -O https://www.openssl.org/source/openssl-1.1.1b.tar.gz
+tar xzvf openssl-1.1.1b.tar.gz
+cd openssl-1.1.1b/
+vim crypto/random/rand_unix.c
+637Gd17d621Gd2d603Gdd480Gd30d:wq
+vim crypto/random/rand_lib.c
+250Gd2d:wq
+./config
+make -j 4
+cd ..
+LD_LIBRARY_PATH=./openssl-1.1.1b ./openssl-1.1.1b/apps/openssl genrsa 1024 > key.pem
+LD_LIBRARY_PATH=./openssl-1.1.1b ./openssl-1.1.1b/apps/openssl rsautl -encrypt -inkey key.pem -in flag.txt -out encrypted
+fg 1
+
+
+
+
+TSGCTF{openssl_genrsa_is_hardly_predictable}
+
+sudo docker build -t problem .
+sudo docker run -it --device=/dev/input/event1:/dev/input/event1 problem "/bin/bash"
+
+sudo docker build -t problem_openssl .
+sudo docker run -it --device=/dev/input/event1:/dev/input/event1 problem_openssl "/bin/bash"
+
+
+/tmp# cat /dev/input/event1 > input &

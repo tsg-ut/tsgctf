@@ -1,0 +1,21 @@
+{
+  "name": "writeup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tracker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bencode": "^2.0.1",
+    "bitfield": "^2.0.0",
+    "bittorrent-protocol": "^3.0.1",
+    "bittorrent-tracker": "^9.10.1",
+    "create-torrent": "^3.33.0",
+    "fastify": "^2.2.0",
+    "lodash": "^4.17.11"
+  }
+}

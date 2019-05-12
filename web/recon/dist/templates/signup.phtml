@@ -1,0 +1,51 @@
+{% extends 'base.phtml' %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center mt-4">
+        <form method="post" action="/signup" class="w-75">
+            <h1>Sign Up</h1>
+            {% if error_message is defined %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+            {% endif %}
+
+            <h2>Basic Information </h2>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="profile">Profile</label>
+                <input type="text" id="profile" name="profile" class="form-control" placeholder="Profile">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <input type="text" id="message" name="message" class="form-control" placeholder="Recovery Message (Password Hint)">
+            </div>
+            
+            <h2>Security Question</h2>
+            <p>Please check what you like. This answer will be used when you would like to see the recovery message you set above.</p>
+            <div class="form-group">
+                {% for key, value in recovery_questions %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="checked" id="{{ key }}" name="q{{ loop.index }}">
+                    <label class="form-check-label" for="defaultCheck1">
+                        {{ value }} {{ key }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+            <input type="hidden" name="{{ token['keys']['name'] }}" value="{{ token['values']['name'] }}">
+            <input type="hidden" name="{{ token['keys']['value'] }}" value="{{ token['values']['value'] }}">
+            <button type="submit" class="form-control">Sign Up</button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

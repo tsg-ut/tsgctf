@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Millionaire Girl</title>
+		<link rel="stylesheet" href="https://unpkg.com/bulmaswatch/darkly/bulmaswatch.min.css">
+		<style>
+			html {
+				text-align: center;
+				padding: 3em 0;
+			}
+			html.bang {
+				background: red;
+			}
+			html.bang body {
+				display: none;
+			}
+			ul {
+				text-align: left;
+				display: inline-block;
+			}
+			p {
+				margin: 0 !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" class="content">
+			<h1 class="title is-size-1 has-text-danger">Millionaire Girl</h1>
+			<h2>Rules</h2>
+			<div>
+				<ul>
+					<li>You'll have revolver with six chambers and one bullet inside.</li>
+					<li>For each turn, you can shot the trigger or roll the cylinder to reset the position of bullet.</li>
+					<li>For each success, you earn [shots] x [combo] x 10 dollars.</li>
+					<li>When revolver fires, <span class="has-text-danger">you die.</span></li>
+					<li>Go million to get the flag.</li>
+				</ul>
+			</div>
+			<div v-if="bang" :style="{margin: '1em 0'}">
+				<button class="button" @click="restart()">RESTART</button>
+			</div>
+			<div v-else :style="{margin: '1em 0'}">
+				<button class="button" @click="shot()">SHOT</button>
+				<button class="button" @click="roll()">ROLL</button>
+			</div>
+			<div :style="{margin: '1em 0'}">score: <big>${{dollar}}</big> next: <big>${{next}}</big></div>
+			<p class="logs" v-for="log in logs">
+				<span v-if="log === 'bang'" class="has-text-danger">
+					Bang! The gun fired and you lost.
+				</span>
+				<span v-else-if="log === 'click'">
+					The trigger clicked.
+				</span>
+				<span v-else-if="log === 'rattle'" class="has-text-info">
+					rattle-rattle...
+				</span>
+				<span v-else class="has-text-warning">
+					{{log}}
+				</span>
+			</p>
+		</div>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script>
+			new Vue({
+				el: '#app',
+				data: () => ({
+					bang: false,
+					shots: 0,
+					combo: 0,
+					dollar: 0,
+					logs: [],
+				}),
+				computed: {
+					next() {
+						return (this.shots + 1) * (this.combo + 1) * 10;
+					},
+				},
+				methods: {
+					async shot() {
+						const res = await fetch('/shot', {method: 'POST'});
+						const text = await res.text();
+						if (text.startsWith('TSGCTF{')) {
+							this.logs.push(`You got it! The flag is ${text}`);
+						} else if (text === 'bang!') {
+							this.logs.push('bang');
+							this.bang = true;
+							document.documentElement.classList.add('bang');
+							setTimeout(() => document.documentElement.classList.remove('bang'), 1000);
+						} else {
+							this.logs.push('click');
+							this.shots++;
+							this.combo++;
+							this.dollar = parseInt(text);
+						}
+					},
+					async roll() {
+						const res = await fetch('/roll', {method: 'POST'});
+						const text = await res.text();
+						this.combo = 0;
+						this.logs.push('rattle');
+					},
+					restart() {
+						this.bang = false;
+						this.shots = 0;
+						this.combo = 0;
+						this.dollar = 0;
+						this.logs = [];
+					},
+				},
+			});
+		</script>
+	</body>
+</html>

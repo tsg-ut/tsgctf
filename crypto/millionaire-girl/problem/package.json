@@ -1,0 +1,21 @@
+{
+  "name": "millionaire-girl",
+  "engines": {
+    "node": "11.11.0"
+  },
+  "version": "1.0.0",
+  "description": "@hakatashi",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "lodash": "^4.17.11"
+  }
+}

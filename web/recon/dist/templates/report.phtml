@@ -1,0 +1,36 @@
+{% extends 'base.phtml' %}
+
+{% block body %}
+<div class="container">    
+    <div class="row justify-content-center mt-5">
+        <form method="POST" action="/report/do" class="w-75">
+            <h1>Report a User</h1>
+            <p>If you found a suspicious user, please tell us the username. Administrators will check the user's page(`/profile/xxxxxxxx`).</p>
+
+            {% if error_message is defined %}
+            <div class="row">
+                <div class="alert alert-danger" role="alert">
+                    {{ error_message }}
+                </div>
+            </div>
+            {% endif %}
+            {% if message is defined %}
+            <div class="row">
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            </div>
+            {% endif %}
+            <hr>
+            <div class="form-group">
+                <label for="username">Suspicious username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="username">
+            </div>
+            <script src="//www.google.com/recaptcha/api.js" async defer></script><div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
+            <input type="hidden" name="{{ token['keys']['name'] }}" value="{{ token['values']['name'] }}">
+            <input type="hidden" name="{{ token['keys']['value'] }}" value="{{ token['values']['value'] }}">
+            <button type="submit">submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

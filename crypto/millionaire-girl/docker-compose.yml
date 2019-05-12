@@ -1,0 +1,16 @@
+version: '3'
+services:
+  millionaire-girl:
+    restart: always
+    image: 'node:11.11.0-alpine'
+    user: node
+    working_dir: /home/node
+    volumes:
+      - ./problem:/home/node/app:ro
+    expose:
+      - '10030'
+    command: sh -c "cp app/package* /home/node && npm install && cd app && npm start"
+    ports:
+      - '10030:10030'
+    environment:
+      - FLAG=TSGCTF{A_huge_we@lth_is_built_upon_millions_of_bodies}

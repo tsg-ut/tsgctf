@@ -1,0 +1,27 @@
+LANG=C date --utc > /dev/random 1556362182 
+
+Sat Apr 27 12:37:48 UTC 2019
+
+
+echo "Sat Apr 27 12:37:48 UTC 2019" > /dev/random
+echo nyan >> /dev/random
+
+
+curl -O https://www.openssl.org/source/openssl-1.1.1b.tar.gz
+
+1556362433
+
+echo "1 1556362433" > nonce.txt
+openssl rsautl -decrypt -inkey key.pem -in encrypted -out o.txt
+
+for i in `seq 0 32768`; do 
+	echo "$i 1556368884" > nonce.txt;
+	LD_LIBRARY_PATH=./openssl-1.1.1b ./openssl-1.1.1b/apps/openssl genrsa 1024 > key.pem
+	openssl rsautl -decrypt -inkey key.pem -in encrypted -out o.txt
+	if [$? = 0]; then
+		break
+	fi
+done
+
+
+./ope/tap/tope/trsautl -encrypt -inkey save_key.pem -in hoge.txt -out encrypted

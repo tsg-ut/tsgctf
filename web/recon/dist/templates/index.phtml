@@ -1,0 +1,76 @@
+{% extends 'base.phtml' %}
+
+{% block body %}
+<div class="row position-relative overflow-hidden p-3 p-md-5 bg-light">
+    <div class="col-md-8 mx-auto border-right">
+        <h1 class="display-4 font-weight-normal">URProfile</h1>
+        <p class="lead font-weight-normal">Publish Your Profile Quickly.</p>
+    </div>
+    <div class="col-md-3 mx-auto">
+        <form method="post" action="/signin">
+            <h1 class="display-5 font-weight-normal">Sign In</h1>
+            {% if error_message is defined %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+            {% endif %}
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+            <input type="hidden" name="{{ token['keys']['name'] }}" value="{{ token['values']['name'] }}">
+            <input type="hidden" name="{{ token['keys']['value'] }}" value="{{ token['values']['value'] }}">
+            <button type="submit" id="signin_submit" class="form-control">Sign In</button>
+        </form>
+    </div>
+</div>
+<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden w-50">
+        <div class="my-3 py-3">
+            <h2 class="display-5">Simple.</h2>
+            <p class="lead"><a href="/profile/21232f297a57a5a743894a0e4a801fc3">Sample by admin with iframe.</a></p>
+            <img src="/image/admin.png" class="w-75">
+        </div>
+    </div>
+    <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden w-50">
+        <div class="my-3 p-3">
+            <h2 class="display-5">Expressive.</h2>
+            <p class="lead">You can use HTML tags such as &lt;b&gt;, &lt;i&gt;, etc.</p>            
+            <img src="/image/tags.png" class="w-75">
+        </div>
+    </div>
+</div>
+
+<footer class="container py-5">
+    <div class="row">
+        <div class="col-12 col-md">
+            <h5>URProfile</h5>
+            <small class="d-block mb-3 text-muted">&copy; 2019</small>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Organizers</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="https://tsg.ne.jp">TSG</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Coming soon.</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Coming soon.</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Coming soon.</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Coming soon.</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Coming soon.</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Coming soon.</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+
+{% endblock %}

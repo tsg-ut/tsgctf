@@ -1,0 +1,13 @@
+[package]
+name = "wip0001"
+version = "0.1.0"
+authors = ["Koki Takahashi <hakatasiloving@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+crc = "1.8.1"
+serde = "1.0.90"
+bincode = "1.1.3"
+serde_derive = "1.0.90"
+rust-crypto = "0.2.36"
+hex = "0.3.2"

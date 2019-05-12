@@ -1,0 +1,12 @@
+version: '2.3'
+
+services:
+    ctf:
+        build: ./
+        restart: always
+        ports:
+            - "30007:30007"
+        expose:
+            - "30007"
+        mem_limit: 100m
+        read_only: true

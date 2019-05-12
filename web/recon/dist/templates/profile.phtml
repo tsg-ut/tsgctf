@@ -1,0 +1,14 @@
+{% extends 'base.phtml' %}
+
+{% block body %}
+<div class="container h-100">
+    <div class="row align-items-center h-100 justify-content-center text-center flex-column">
+        <div class="card w-50">
+            <div class="card-body">
+                <h5 class="card-title">{{ user['username'] }}</h5>
+                <p class="card-text">{{ user['profile'] | raw }}</p>
+            </div>            
+        </div>
+    </div>
+</div>
+{% endblock %}

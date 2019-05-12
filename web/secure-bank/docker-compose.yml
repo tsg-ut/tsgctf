@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app:
+    restart: always
+    build: src
+    ports:
+      - '19292:9292'
+    volumes:
+      - ./src:/app

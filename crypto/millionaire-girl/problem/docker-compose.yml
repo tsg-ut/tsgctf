@@ -1,0 +1,15 @@
+version: '3'
+services:
+  millionaire-girl:
+    image: 'node:11.11.0-alpine'
+    user: node
+    working_dir: /home/node
+    volumes:
+      - ./:/home/node/app:ro
+    expose:
+      - '10030'
+    command: sh -c "cp app/package* /home/node && npm install && cd app && npm start"
+    ports:
+      - '10030:10030'
+    environment:
+      - FLAG=TSGCTF{XXXXXXXXXXXXXXXX}

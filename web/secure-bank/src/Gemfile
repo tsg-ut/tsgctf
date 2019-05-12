@@ -1,0 +1,8 @@
+source :rubygems
+
+gem 'rack'
+gem 'rack-contrib'
+gem 'sinatra'
+gem 'sinatra-contrib'
+gem 'sqlite3'
+gem 'puma'

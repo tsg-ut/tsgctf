@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue" crossorigin="anonymous"></script>
+
+    <style>[v-cloak]>*{display: none} [v-cloak]::before{content:"loading..."}</style>
+
+    <title>Secure Bank</title>
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <div id="app" v-cloak>
+          <div v-if="info" class="notification is-success">
+            {{ info }}
+          </div>
+          <div v-if="error" class="notification is-warning">
+            {{ error }}
+          </div>
+
+          <div v-if="logined">
+            <div class="box">
+              <div class="columns">
+                <div class="column is-one-quarter">
+                  <div class="card">
+                    <header class="card-header">
+                      <div class="card-header-title level">
+                        <div class="level-left"><p>{{ username }}</p></div>
+                        <div class="level-right">
+                          <button v-on:click="logout" type="button" class="button">Logout</button>
+                        </div>
+                      </div>
+                    </header>
+                    <div class="card-content">
+                      <div class="content">
+                        <table class="table is-stripped">
+                          <tbody>
+                            <tr><td>Balance</td><td>{{ balance }}</td></tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="column">
+                  <div class="tabs is-boxed">
+                    <ul>
+                      <li v-bind:class="{'is-active': tab === 'transfer'}">
+                        <a v-on:click="tab = 'transfer'">Transfer</a>
+                      </li>
+                      <li v-bind:class="{'is-active': tab === 'tools'}">
+                        <a v-on:click="tab = 'tools'">Tools</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div v-if="tab === 'transfer'">
+                    <form v-on:submit.prevent="transfer">
+                      <div class="field">
+                        <div class="control has-icons-left">
+                          <input v-model="target" type="text" class="input" minlength="4" placeholder="Username to Transfer" />
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class="field">
+                        <div class="control has-icons-left">
+                          <input v-model="amount" type="number" class="input" placeholder="Amount" />
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-money-bill-wave"></i>
+                          </span>
+                        </div>
+                      </div>
+                      <button v-on:click="transfer" type="submit" class="button is-link">Transfer</button>
+                    </form>
+                  </div>
+
+                  <div v-if="tab === 'tools'">
+                    <div class="notification is-success" v-if="flag">
+                      Flag is: <code>{{ flag }}</code>
+                    </div>
+
+                    <button v-on:click="getflag" type="button" class="button is-link">Get Flag</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div v-else>
+            <form v-on:submit.prevent="login" class="box">
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input v-model="username" type="text" class="input" minlength="4" placeholder="Username" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input v-model="password" type="password" class="input" minlength="6" placeholder="Password" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-key"></i>
+                  </span>
+                </div>
+              </div>
+
+              <div class="field is-grouped">
+                <div class="control">
+                  <input v-on:click="login" type="submit" class="button is-link" value="Login" />
+                </div>
+                <div class="control">
+                  <button v-on:click="register" type="button" class="button">Register</button>
+                </div>
+              </div>
+            </form>
+
+            <p><a href="/source">source</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <script src="/app.js"></script>
+  </body>
+</html>

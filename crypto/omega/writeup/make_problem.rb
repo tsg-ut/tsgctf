@@ -1,4 +1,4 @@
-require_relative '../params'
+srand(68)
 
 UNITS = [[0,1],[0,-1],[1,0],[-1,0],[1,1],[-1,-1]]
 
@@ -53,8 +53,8 @@ def norm(x)
   a*a + b*b - a*b
 end
 
-modulos = MODULOS
-res = PROBLEM
+flag = "TSGCTF{I_H34RD_S0ME_IN7EGERS_INCLUDING_EISENSTEIN'S_F0RM_EUCL1DE4N_R1NG!}"
+msg  = [flag[0,flag.size/2], flag[flag.size/2,flag.size]].map {|text| text.unpack("H*")[0].hex}
 
 def extgcd(a, b)
   if b == [0, 0]
@@ -86,17 +86,18 @@ def extgcd(a, b)
   end
 end
 
-def chinese(x1, m1, x2, m2)
-  mt = extgcd(m1, m2)
-  [add(mul(x1, m2, mt[:y]), mul(x2, m1, mt[:x])), mul(m1, m2)]
+modulos = 20.times.inject([]){|s, _|
+  x = nil
+  loop do
+    x = [rand(1000000), rand(1000000)]
+    break if s.all?{|y| UNITS.include? extgcd(x, y)[:gcd]}
+  end
+  s << x
+}
+
+res = modulos.map do |m|
+  [mod(msg, m), m]
 end
 
-t, m = [[0,0], [1,0]]
-res.each do |tt, mm|
-  t, m = chinese(tt, mm, t, m)
-  t = mod(t, m)
-end
-
-UNITS.each do |u|
-  p mul(u,t).map{ |x| [x.to_s(16)].pack("H*")}.join
-end
+puts 'MODULOS = %p' % [modulos]
+puts 'PROBLEM = %p' % [res]

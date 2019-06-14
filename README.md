@@ -30,6 +30,8 @@
 
 ### Top-teams
 
+* TokyoWesterns: https://westerns.tokyo/writeups/tsgctf2019.html
+  * Super Smash Bros, Odd Multiplier, Capacity Oriented Vector, BADNONCE, Secure Bank, RECON, OPQRX, OMEGA, Millionaire Girl, Curved, Harekaze, Obliterated File, Obliterated File Again, ffi, Eso VM, Recorded, plzseed
 * hxp: https://hackmd.hxp.io/HZe6uFM5SK2QV-rue_5FSQ
   * Super Smash Bros, Odd Multiplier, OPQRX, OMEGA, Millionaire Girl, Curved, Harekaze, Obliterated File Again, ffi
 * NaruseJun (English): https://hackmd.io/s/HJhnHwTiE

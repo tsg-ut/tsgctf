@@ -60,6 +60,8 @@
   * Secure Bank
 * [Japanese] https://st98.github.io/diary/posts/2019-05-05-tsg-ctf.html
   * Obliterated File, Obliterated File Again, BADNONCE Part1/Part2, RECON
+* [Japanese] https://ptr-yudai.hatenablog.com/entry/2019/07/01/143652#-TSG-CTF
+  * Super Smash Bros
 * [English] https://amccormack.net/2019-05-05-obliterated-file-tsg-ctf.html
   * Obliterated File, Obliterated File Again
 * [English] https://amccormack.net/2019-05-05-secure-bank-tsg-ctf.html

@@ -4,7 +4,7 @@ GEM
     backports (3.13.0)
     multi_json (1.13.1)
     mustermann (1.0.3)
-    puma (3.12.1)
+    puma (3.12.2)
     rack (2.0.7)
     rack-contrib (2.1.0)
       rack (~> 2.0)
